@@ -2,7 +2,7 @@
 // import { create, Whatsapp } from 'venom-bot';
 const venom = require('venom-bot');
 
-var numbers=new Array(25);
+var numbers = new Array(25);
 var cutnumber;
 var result
 var output;
@@ -15,7 +15,7 @@ function reset() {
     outputinit();
 }
 
-function outputinit(){
+function outputinit() {
     result = numbers[0] + " " + numbers[1] + " " + numbers[2] + " " + numbers[3] + " " + numbers[4] + "\n" +
         numbers[5] + " " + numbers[6] + " " + numbers[7] + " " + numbers[8] + " " + numbers[9] + "\n" +
         numbers[10] + " " + numbers[11] + " " + numbers[12] + " " + numbers[13] + " " + numbers[14] + "\n" +
@@ -24,8 +24,8 @@ function outputinit(){
 }
 
 function jumble() {
-    for (var i = 0; i < 25;i++){
-        random = Math.round(Math.random()*100)/4;
+    for (var i = 0; i < 25; i++) {
+        random = Math.round(Math.random() * 100) / 4;
         temp = numbers[random];
         numbers[random] = numbers[24 - random];
         numbers[24 - random] = temp;
@@ -34,11 +34,11 @@ function jumble() {
 }
 
 venom
-  .create()
-  .then((client) => start(client))
-  .catch((erro) => {
-    console.log(erro);
-  });
+    .create()
+    .then((client) => start(client))
+    .catch((erro) => {
+        console.log(erro);
+    });
 
 
 function start(client) {
@@ -50,85 +50,88 @@ function start(client) {
                 "prime nums - no jumble\n" +
                 "odd nums - maybe or may not be jumble\n" +
                 "even nums - Always jumble\n";
-        output += result;
-      client
-        .reply(message.from, output, message.id.toString())
-        .then((result) => {
-          console.log('Result: ', result); //return object success
-        })
-        .catch((erro) => {
-          console.error('Error when sending: ', erro); //return object error
-        });
-    }
-    else if (message.body.toString().substring(0,5) == 'Bingo' || message.body.toString().substring(0,5) == 'bingo') {
-        cutnumber = message.body.toString().substring(6, message.body.toString().length);
-        
-        for (var i = 0; i < 25; i++){
-            if (numbers[i].length == 4) {
-                if (parseInt(numbers[i].substring(1, 3)) == parseInt(cutnumber)) {
-                    output = "Already cut";
-                    break;
-                }
-            }
-            else if (numbers[i].length == 2) {
-                if (parseInt(numbers[i]) == parseInt(cutnumber)) {
-                    numbers[i] = '~' + numbers[i] + '~';
-
-                    if (cutnumber == 2 || cutnumber == 3 || cutnumber == 5 || cutnumber == 7 || cutnumber == 11 || cutnumber == 13 || cutnumber == 17 || cutnumber == 23)
-                        outputinit();
-                    else if (cutnumber % 2 == 0)
-                        jumble();
-                    else if (cutnumber % 2 == 1){
-                        if (Math.round(Math.random() * 10) % 2 == 0)
-                            jumble();
-                        else outputinit();
-                    }
-                
-                    output = result;
-                    break;
-                }
-            }
-            
+            output += result;
+            client
+                .reply(message.from, output, message.id.toString())
+                .then((result) => {
+                    console.log('Result: ', result); //return object success
+                })
+                .catch((erro) => {
+                    console.error('Error when sending: ', erro); //return object error
+                });
         }
+        else if (message.body.toString().substring(0, 5) == 'Bingo' || message.body.toString().substring(0, 5) == 'bingo') {
+            cutnumber = message.body.toString().substring(6, message.body.toString().length);
 
-        
-        if (numbers[0].substring(0, 1) == "~" && numbers[1].substring(0, 1) == "~" && numbers[2].substring(0, 1) == "~" && numbers[3].substring(0, 1) == "~" && numbers[4].substring(0, 1) == "~")
-        { output += "\n\nYou Won!!!"; reset();}
-        else if (numbers[5].substring(0, 1) == "~" && numbers[6].substring(0, 1) == "~" && numbers[7].substring(0, 1) == "~" && numbers[8].substring(0, 1) == "~" && numbers[9].substring(0, 1) == "~")
-        { output += "\n\nYou Won!!!"; reset();}
-        else if (numbers[10].substring(0, 1) == "~" && numbers[11].substring(0, 1) == "~" && numbers[12].substring(0, 1) == "~" && numbers[13].substring(0, 1) == "~" && numbers[14].substring(0, 1) == "~")
-        { output += "\n\nYou Won!!!"; reset();}
-        else if (numbers[15].substring(0, 1) == "~" && numbers[16].substring(0, 1) == "~" && numbers[17].substring(0, 1) == "~" && numbers[18].substring(0, 1) == "~" && numbers[19].substring(0, 1) == "~")
-        { output += "\n\nYou Won!!!"; reset();}
-        else if (numbers[20].substring(0, 1) == "~" && numbers[21].substring(0, 1) == "~" && numbers[22].substring(0, 1) == "~" && numbers[23].substring(0, 1) == "~" && numbers[24].substring(0, 1) == "~")
-        { output += "\n\nYou Won!!!"; reset();}
-        
-        else if (numbers[0].substring(0, 1) == "~" && numbers[5].substring(0, 1) == "~" && numbers[10].substring(0, 1) == "~" && numbers[15].substring(0, 1) == "~" && numbers[20].substring(0, 1) == "~")
-        { output += "\n\nYou Won!!!"; reset();}
-        else if (numbers[1].substring(0, 1) == "~" && numbers[6].substring(0, 1) == "~" && numbers[11].substring(0, 1) == "~" && numbers[16].substring(0, 1) == "~" && numbers[21].substring(0, 1) == "~")
-        { output += "\n\nYou Won!!!"; reset();}
-        else if (numbers[2].substring(0, 1) == "~" && numbers[7].substring(0, 1) == "~" && numbers[12].substring(0, 1) == "~" && numbers[17].substring(0, 1) == "~" && numbers[22].substring(0, 1) == "~")
-        { output += "\n\nYou Won!!!"; reset();}
-        else if (numbers[3].substring(0, 1) == "~" && numbers[8].substring(0, 1) == "~" && numbers[13].substring(0, 1) == "~" && numbers[18].substring(0, 1) == "~" && numbers[23].substring(0, 1) == "~")
-        { output += "\n\nYou Won!!!"; reset();}
-        else if (numbers[4].substring(0, 1) == "~" && numbers[9].substring(0, 1) == "~" && numbers[14].substring(0, 1) == "~" && numbers[19].substring(0, 1) == "~" && numbers[24].substring(0, 1) == "~")
-        { output += "\n\nYou Won!!!"; reset();}
-        
-        else if (numbers[0].substring(0, 1) == "~" && numbers[6].substring(0, 1) == "~" && numbers[12].substring(0, 1) == "~" && numbers[18].substring(0, 1) == "~" && numbers[24].substring(0, 1) == "~")
-        { output += "\n\nYou Won!!!"; reset();}
-        else if (numbers[4].substring(0, 1) == "~" && numbers[8].substring(0, 1) == "~" && numbers[12].substring(0, 1) == "~" && numbers[16].substring(0, 1) == "~" && numbers[20].substring(0, 1) == "~")
-        { output += "\n\nYou Won!!!"; reset();}
-        
-        
+            if (parseInt(cutnumber) > 0 && parseInt(cutnumber) <= 25)
+                for (var i = 0; i < 25; i++) {
+                    if (numbers[i].length == 4) {
+                        if (parseInt(numbers[i].substring(1, 3)) == parseInt(cutnumber)) {
+                            output = "Already cut";
+                            break;
+                        }
+                    }
+                    else if (numbers[i].length == 2) {
+                        if (parseInt(numbers[i]) == parseInt(cutnumber)) {
+                            numbers[i] = '~' + numbers[i] + '~';
 
-        client
-          .reply(message.from, output, message.id.toString())
-          .then((result) => {
-            console.log('Result: ', result); //return object success
-          })
-          .catch((erro) => {
-            console.error('Error when sending: ', erro); //return object error
-          });
-      }
-  });
+                            if (cutnumber == 2 || cutnumber == 3 || cutnumber == 5 || cutnumber == 7 || cutnumber == 11 || cutnumber == 13 || cutnumber == 17 || cutnumber == 23)
+                                outputinit();
+                            else if (cutnumber % 2 == 0)
+                                jumble();
+                            else if (cutnumber % 2 == 1) {
+                                if (Math.round(Math.random() * 10) % 2 == 0)
+                                    jumble();
+                                else outputinit();
+                            }
+
+                            output = result;
+                            break;
+                        }
+                    }
+
+                }
+            else output = "Number not in Bingo Range";
+
+
+
+            if (numbers[0].substring(0, 1) == "~" && numbers[1].substring(0, 1) == "~" && numbers[2].substring(0, 1) == "~" && numbers[3].substring(0, 1) == "~" && numbers[4].substring(0, 1) == "~") { output += "\n\nYou Won!!!"; reset(); }
+            else if (numbers[5].substring(0, 1) == "~" && numbers[6].substring(0, 1) == "~" && numbers[7].substring(0, 1) == "~" && numbers[8].substring(0, 1) == "~" && numbers[9].substring(0, 1) == "~") { output += "\n\nYou Won!!!"; reset(); }
+            else if (numbers[10].substring(0, 1) == "~" && numbers[11].substring(0, 1) == "~" && numbers[12].substring(0, 1) == "~" && numbers[13].substring(0, 1) == "~" && numbers[14].substring(0, 1) == "~") { output += "\n\nYou Won!!!"; reset(); }
+            else if (numbers[15].substring(0, 1) == "~" && numbers[16].substring(0, 1) == "~" && numbers[17].substring(0, 1) == "~" && numbers[18].substring(0, 1) == "~" && numbers[19].substring(0, 1) == "~") { output += "\n\nYou Won!!!"; reset(); }
+            else if (numbers[20].substring(0, 1) == "~" && numbers[21].substring(0, 1) == "~" && numbers[22].substring(0, 1) == "~" && numbers[23].substring(0, 1) == "~" && numbers[24].substring(0, 1) == "~") { output += "\n\nYou Won!!!"; reset(); }
+
+            else if (numbers[0].substring(0, 1) == "~" && numbers[5].substring(0, 1) == "~" && numbers[10].substring(0, 1) == "~" && numbers[15].substring(0, 1) == "~" && numbers[20].substring(0, 1) == "~") { output += "\n\nYou Won!!!"; reset(); }
+            else if (numbers[1].substring(0, 1) == "~" && numbers[6].substring(0, 1) == "~" && numbers[11].substring(0, 1) == "~" && numbers[16].substring(0, 1) == "~" && numbers[21].substring(0, 1) == "~") { output += "\n\nYou Won!!!"; reset(); }
+            else if (numbers[2].substring(0, 1) == "~" && numbers[7].substring(0, 1) == "~" && numbers[12].substring(0, 1) == "~" && numbers[17].substring(0, 1) == "~" && numbers[22].substring(0, 1) == "~") { output += "\n\nYou Won!!!"; reset(); }
+            else if (numbers[3].substring(0, 1) == "~" && numbers[8].substring(0, 1) == "~" && numbers[13].substring(0, 1) == "~" && numbers[18].substring(0, 1) == "~" && numbers[23].substring(0, 1) == "~") { output += "\n\nYou Won!!!"; reset(); }
+            else if (numbers[4].substring(0, 1) == "~" && numbers[9].substring(0, 1) == "~" && numbers[14].substring(0, 1) == "~" && numbers[19].substring(0, 1) == "~" && numbers[24].substring(0, 1) == "~") { output += "\n\nYou Won!!!"; reset(); }
+
+            else if (numbers[0].substring(0, 1) == "~" && numbers[6].substring(0, 1) == "~" && numbers[12].substring(0, 1) == "~" && numbers[18].substring(0, 1) == "~" && numbers[24].substring(0, 1) == "~") { output += "\n\nYou Won!!!"; reset(); }
+            else if (numbers[4].substring(0, 1) == "~" && numbers[8].substring(0, 1) == "~" && numbers[12].substring(0, 1) == "~" && numbers[16].substring(0, 1) == "~" && numbers[20].substring(0, 1) == "~") { output += "\n\nYou Won!!!"; reset(); }
+
+
+
+            client
+                .reply(message.from, output, message.id.toString())
+                .then((result) => {
+                    console.log('Result: ', result); //return object success
+                })
+                .catch((erro) => {
+                    console.error('Error when sending: ', erro); //return object error
+                });
+        }
+        else if (message.body == 'Bingo Reset' || message.body == 'bingo reset') {
+            output = "Board Reseted!!";
+            reset();
+            client
+                .reply(message.from, output, message.id.toString())
+                .then((result) => {
+                    console.log('Result: ', result); //return object success
+                })
+                .catch((erro) => {
+                    console.error('Error when sending: ', erro); //return object error
+                });
+        }
+    });
 }
