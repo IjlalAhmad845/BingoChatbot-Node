@@ -44,12 +44,12 @@ venom
 function start(client) {
     client.onMessage((message) => {
         if (message.body == 'Bingo' || message.body == 'bingo') {
-            output = "Welcome to Bingo!!!\n" +
-                "Type \"Bingo number\" to cut that number\n" +
-                "But the board will jumble acc to your input\n" +
-                "prime number - no jumble\n" +
-                "odd numbers - maybe or may not be jumble\n" +
-                "even numbers - Always jumble";
+            output = "Welcome to Bingo!!!\n\n" +
+                "Type \"Bingo num\" to cut that num\n\n" +
+                "But the board will jumble acc to your input\n\n" +
+                "prime nums - no jumble\n" +
+                "odd nums - maybe or may not be jumble\n" +
+                "even nums - Always jumble\n";
         output += result;
       client
         .reply(message.from, output, message.id.toString())
