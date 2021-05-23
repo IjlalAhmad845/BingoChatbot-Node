@@ -1,0 +1,9 @@
+***This bot will only work if u already have Node.js installed on ur computer***
+
+step 1 - run installer1.bat file and hit enter until it asks for yes , then type yes to close installer1.bat
+step 2 - run installer2.bat file and wait until it installs all the necessarry files
+step 3 - after installation of both installers run launher.bat file to launch the bot , it will asks for Qr code for the first time.Scan with your whatsapp account and you are good to go
+
+
+type = in chat to show all the commands
+***bot will only work for other people's messages it will not work for your messages***
