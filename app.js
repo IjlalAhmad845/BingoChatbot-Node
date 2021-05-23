@@ -60,6 +60,18 @@ function start(client) {
                     console.error('Error when sending: ', erro); //return object error
                 });
         }
+        else if (message.body == 'Bingo Reset' || message.body == 'bingo reset' || message.body == 'Bingo reset') {
+            output = "Board Reseted!!";
+            reset();
+            client
+                .reply(message.from, output, message.id.toString())
+                .then((result) => {
+                    console.log('Result: ', result); //return object success
+                })
+                .catch((erro) => {
+                    console.error('Error when sending: ', erro); //return object error
+                });
+        }
         else if (message.body.toString().substring(0, 5) == 'Bingo' || message.body.toString().substring(0, 5) == 'bingo') {
             cutnumber = message.body.toString().substring(6, message.body.toString().length);
 
@@ -112,18 +124,6 @@ function start(client) {
 
 
 
-            client
-                .reply(message.from, output, message.id.toString())
-                .then((result) => {
-                    console.log('Result: ', result); //return object success
-                })
-                .catch((erro) => {
-                    console.error('Error when sending: ', erro); //return object error
-                });
-        }
-        else if (message.body == 'Bingo Reset' || message.body == 'bingo reset') {
-            output = "Board Reseted!!";
-            reset();
             client
                 .reply(message.from, output, message.id.toString())
                 .then((result) => {
