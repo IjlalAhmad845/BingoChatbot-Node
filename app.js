@@ -86,17 +86,7 @@ function start(client) {
                     else if (numbers[i].length == 2) {
                         if (parseInt(numbers[i]) == parseInt(cutnumber)) {
                             numbers[i] = '~' + numbers[i] + '~';
-
-                            if (cutnumber == 2 || cutnumber == 3 || cutnumber == 5 || cutnumber == 7 || cutnumber == 11 || cutnumber == 13 || cutnumber == 17 || cutnumber == 23)
-                                outputinit();
-                            else if (cutnumber % 2 == 0)
-                                jumble();
-                            else if (cutnumber % 2 == 1) {
-                                if (Math.round(Math.random() * 10) % 2 == 0)
-                                    jumble();
-                                else outputinit();
-                            }
-
+                            jumble();
                             output = result;
                             break;
                         }
